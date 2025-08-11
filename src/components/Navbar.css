@@ -1,0 +1,109 @@
+/* Navbar.css */
+.hamburger {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  z-index: 1001;
+  cursor: pointer;
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 75%;
+  height: 100%;
+  background-color: white;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  z-index: 1000;
+  animation: slideIn 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-header {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.menu-links a {
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 100px 24px;
+}
+
+.menu-item {
+  font-size: 20px;
+  font-weight: 400;
+  color: #111;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+  letter-spacing: 0.8px;
+  display: flex;
+  align-items: center;
+}
+
+.menu-item:hover {
+  color: #000;
+  font-weight: 500;
+  border-bottom: 1px solid #000;
+  transform: translateX(6px);
+}
+
+.menu-item::before {
+  content: '·';
+  font-size: 20px;
+  color: #aaa;
+  margin-right: 8px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}

@@ -23,6 +23,9 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.bm-overlay {
+  background: transparent !important; /* 완전 투명 */
+}
 
 .App-link {
   color: #61dafb;

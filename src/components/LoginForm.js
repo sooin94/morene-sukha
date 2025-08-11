@@ -34,7 +34,7 @@ const LoginForm = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-sm mx-auto">
             <input type="email" name="email" placeholder="이메일" onChange={handleChange} value={formData.email} required />
             <input type="password" name="password" placeholder="비밀번호" onChange={handleChange} value={formData.password} required />
-            <button type="submit" className="bg-black text-white py-2 rounded">로그인</button>
+            <button type="submit" className="bg-black text-white py-2 rounded">Login</button>
             {message && <p className="text-center text-sm text-red-500">{message}</p>}
         </form>
     );

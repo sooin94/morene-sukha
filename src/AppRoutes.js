@@ -8,7 +8,6 @@ import ProtectedRoute from './components/ProtectedRoute';
 import { Routes, Route, useLocation, Link, useNavigate } from 'react-router-dom';
 import axiosInstance from './api/axiosInstance';
 
-
 function AppRoutes() {
     const location = useLocation();
     const navigate = useNavigate();
@@ -41,9 +40,9 @@ function AppRoutes() {
     }
 
     const handleAddToCart = async (menuItem) => {
-        const existingItem = cart.find((item) => item.productId._id === menuItem._id);
+        const existingItem = cart.find((item) => item.productId === menuItem._id);
         const quantity = existingItem ? 1 : 1; // 그냥 하나씩 추가
-        
+        console.log('menuItem._id : ', menuItem._id)
         try {
             const res = await axiosInstance.post('/api/cart', {
                 productId: menuItem._id,
@@ -81,20 +80,20 @@ function AppRoutes() {
                     <h1>morene-sukha 🧘‍♀️</h1>
                     <Link to={isMenu ? '/cart' : '/'}>
                         <button>
-                            {isMenu ? '🛍 장바구니 보기' : '🍹 메뉴로 돌아가기'}
+                            {isMenu ? '🛍 go to the cart' : '🍹 back to menu'}
                         </button>
                     </Link>
                 </div>
                 <div className="flex gap-3 items-center">
                     {userName ?(
                         <>
-                            <span>{userName}님</span>
-                            <button onClick={handleLogout} className=""bg-red-500 text-white px-3 py-1 rounded>로그아웃</button>
+                            <span>{userName}</span>
+                            <button onClick={handleLogout} className=""bg-red-500 text-white px-3 py-1 rounded>Logout</button>
                         </>
                     ) : (
                         <>
-                            <button onClick={() => navigate('/login')}>로그인</button>
-                            <button onClick={() => navigate('/signup')}>회원가입</button>
+                            <button onClick={() => navigate('/login')}>Login</button>
+                            <button onClick={() => navigate('/signup')}>Register</button>
                         </>
                     )}
                 </div>

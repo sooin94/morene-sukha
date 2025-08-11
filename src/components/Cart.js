@@ -23,6 +23,7 @@ const Cart = ({cart, handleIncrease, handleDecrease, setCart }) => {
   const handleRemove = async(productId) => {
     try{
       const res = await axiosInstance.delete(`/api/cart/${productId}`);
+      console.log(res.data.message);
       setCart(res.data.cart.items);
     } catch(err){
       console.error('삭제 실패: ', err.response?.data?.message || err.message);
@@ -45,9 +46,9 @@ const Cart = ({cart, handleIncrease, handleDecrease, setCart }) => {
   
   return (
       <div className="cart-wrapper">
-          <h2>🛍 장바구니</h2>
+          <h2>🛍 cart</h2>
           {cart.length === 0 ? (
-              <p>장바구니가 비어있어요</p>
+              <p>Your cart is empty</p>
           ) : (
               <>
                   {cart.map((item) => (
@@ -61,15 +62,15 @@ const Cart = ({cart, handleIncrease, handleDecrease, setCart }) => {
                 <button onClick={() => handleQuantity(item.productId._id, item.quantity+1)}>+</button>
               </div>
               <div className="cart-price">
-                {(item.productId.price * item.quantity).toLocaleString()}원
-              <button onClick={() => handleRemove(item.productId._id)}>❌ 삭제</button>
+                {(item.productId.price * item.quantity).toLocaleString()}won
+              <button onClick={() => handleRemove(item.productId._id)}>❌ delete</button>
               </div>
             </div>
           </div>
         ))}
-        <div className="cart-total">총합: {total.toLocaleString()}원</div>
-        <button className="cart-order-btn">주문하기</button>
-        <button onClick={clearCart} className="bg-red-500 text-white py-1 px-3 rounded mt-4">장바구니 비우기</button>
+        <div className="cart-total">total: {total.toLocaleString()}원</div>
+        <button className="cart-order-btn">make an order</button>
+        <button onClick={clearCart} className="bg-red-500 text-white py-1 px-3 rounded mt-4">clear cart</button>
       </>
     )}
   </div>

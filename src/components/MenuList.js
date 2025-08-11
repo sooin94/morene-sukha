@@ -20,7 +20,7 @@ const MenuList = ({ onAddToCart }) => {
     
     return (
         <div className="menu-grid">
-            <h2>🍸 메뉴 리스트</h2>
+            <h2>🍸 Menu List</h2>
             {menus.map((menu) => (
                 <div key={menu._id} className="menu-card">
                 <div className="menu-image-wrapper">
@@ -28,11 +28,11 @@ const MenuList = ({ onAddToCart }) => {
                 </div>
                 <div className="menu-card-content">
                     <span className="menu-name">{menu.name}</span>
-                    <span className="menu-price">{menu.price.toLocaleString()}원</span>
+                    <span className="menu-price">{menu.price.toLocaleString()}won</span>
                 </div>
                 <p className="menu-description">{menu.description}</p>
                 <button className="menu-button" onClick={() => handleAdd(menu)}>
-                    🛒 담기
+                    🛒 add
                 </button>
                 </div>
             ))}
