@@ -32,6 +32,7 @@ const Navbar = () => {
             <Link className="menu-item" to="/bookings" onClick={closeMenu}>🎫 show</Link>
             <Link className="menu-item" to="/cart" onClick={closeMenu}>🛒 cart</Link>
             <Link className="menu-item" to="/orders/my" onClick={closeMenu}>📦 orders</Link>
+            <Link className="menu-item" to="/admin" onClick={closeMenu}>📦 admin</Link>
           </Menu>
       </div>
       )}

@@ -22,9 +22,13 @@ const LoginForm = () => {
             const { token, user } = res.data;
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
-
+            console.log(
+                        'JWT exists:',
+                        !!localStorage.getItem('token')
+            );
             setMessage('로그인 성공 !');
             window.location.href = '/';
+       
         } catch(err){
             setMessage('로그인 실패 : '+ (err.response?.data?.message || '에러 발생'));
         }

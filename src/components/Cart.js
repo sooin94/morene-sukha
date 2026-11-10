@@ -2,13 +2,63 @@ import './Cart.css'; // Assuming you have some styles in Cart.css
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../api/axiosInstance';
 
-
 const Cart = ({cart, handleIncrease, handleDecrease, setCart }) => {
   const navigate = useNavigate();
 
   const total = cart.reduce(
     (sum, item) => sum + item.productId.price * item.quantity, 0
   );
+
+  const createOrder = async() => {
+    try{
+      // 결제
+      const res = await axiosInstance.post('/api/pay', {
+        items: cart,
+      });
+      console.log(res);
+      createPayment(res.data.order);
+    }catch(err){
+      console.error('장바구니 주문 실패 : ', err.response?.data?.message || err.message);
+    }
+  }
+
+  const createPayment = async(order) => {
+    console.log("orderUid", order.orderUid);
+    const { IMP } = window;
+    IMP.init(process.env.REACT_APP_IMP_CODE); // 너 가맹점 식별코드
+
+    IMP.request_pay(
+      {
+        channelKey: process.env.REACT_APP_PORTONE_CHANNEL_KEY,
+        pg: "kakaopay",
+        pay_method: "card",
+        merchant_uid: order.orderUid,              // ✅ orderUid
+        name: "sooin",
+        amount: order.totalAmount,                    // ✅ 서버가 내려준 totalAmount
+        buyer_email: "kimsoongni1@gmail.com",
+        buyer_name: "김수인",
+        m_redirect_url:"/cart"
+        // buyer_tel 등도 가능
+      },
+      async (rsp) => {
+        if (rsp.success) {
+          // ③ 결제 검증 요청 (서버)
+          await axiosInstance.post("/api/pay", {
+            imp_uid: rsp.imp_uid,
+            orderUid: rsp.orderUid, // == orderUid
+          });
+
+          // ④ 성공 처리 (장바구니 비우기/완료 페이지 이동 등)
+          alert("결제 완료!");
+          // Send Admin Alert 
+          
+        } else {
+          alert(`결제 실패: ${rsp.error_msg}`);
+        }
+      }
+    );
+  }
+
 
   const clearCart = async () => {
     try {
@@ -69,7 +119,7 @@ const Cart = ({cart, handleIncrease, handleDecrease, setCart }) => {
           </div>
         ))}
         <div className="cart-total">total: {total.toLocaleString()}원</div>
-        <button className="cart-order-btn">make an order</button>
+        <button onClick={createOrder} className="cart-order-btn">make an order</button>
         <button onClick={clearCart} className="bg-red-500 text-white py-1 px-3 rounded mt-4">clear cart</button>
       </>
     )}

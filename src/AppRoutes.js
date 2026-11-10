@@ -4,6 +4,7 @@ import MenuList from './components/MenuList';
 import Cart from './components/Cart'; // Assuming you have a Cart component
 import SignupPage from './pages/SignupPage'; // Assuming you have a SignupPage component
 import LoginPage from './pages/LoginPage';
+import AdminPage from './pages/AdminPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import { Routes, Route, useLocation, Link, useNavigate } from 'react-router-dom';
 import axiosInstance from './api/axiosInstance';
@@ -102,6 +103,7 @@ function AppRoutes() {
             <Routes>
                 <Route path="/signup" element={<SignupPage />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/admin" element={<AdminPage />} />
 
                 <Route element={<ProtectedRoute />}>
                     <Route path="/" element={<MenuList onAddToCart={handleAddToCart} />} />
